@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: lol-live-tracker
+    env: node
+    buildCommand: npm install
+    startCommand: node src/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: RIOT_API_KEY
+        sync: false       # Lo ponés manualmente en el dashboard de Render
+      - key: RIOT_REGION
+        value: LA2
