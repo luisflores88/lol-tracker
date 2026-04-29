@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoL Live Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Exo+2:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Background decorativo -->
+  <div class="bg-grid"></div>
+  <div class="bg-glow"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">⚔</span>
+        <span class="logo-text">LIVE<em>TRACKER</em></span>
+      </div>
+      <div class="patch-badge" id="patchBadge">
+        <span class="patch-dot"></span>
+        <span id="patchVersion">Cargando parche...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search Section -->
+  <main class="main">
+    <section class="search-section">
+      <h1 class="hero-title">¿Estás en partida?</h1>
+      <p class="hero-sub">Buscá tu invocador y mirá a quién te toca enfrentar</p>
+
+      <form class="search-form" id="searchForm" onsubmit="return false;">
+        <div class="search-input-group">
+          <div class="input-wrap">
+            <span class="input-icon">🔍</span>
+            <input
+              type="text"
+              id="summonerName"
+              class="search-input"
+              placeholder="NombreDeJugador"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+          <span class="input-separator">#</span>
+          <div class="input-wrap tag-wrap">
+            <input
+              type="text"
+              id="summonerTag"
+              class="search-input tag-input"
+              placeholder="LA2"
+              maxlength="5"
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+          <button class="search-btn" id="searchBtn" onclick="searchSummoner()">
+            <span class="btn-text">BUSCAR</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+        <p class="search-hint">Formato: <strong>NombreDeJugador#TAG</strong> · Región: <span id="regionLabel">LA2</span></p>
+      </form>
+
+      <!-- Error message -->
+      <div class="error-box" id="errorBox" style="display:none">
+        <span class="error-icon">⚠</span>
+        <span id="errorMsg"></span>
+      </div>
+    </section>
+
+    <!-- Summoner Card -->
+    <section class="summoner-card" id="summonerCard" style="display:none">
+      <div class="summoner-info">
+        <div class="summoner-avatar-wrap">
+          <img src="" alt="" id="summonerIcon" class="summoner-avatar">
+          <span class="summoner-level" id="summonerLevel"></span>
+        </div>
+        <div class="summoner-details">
+          <h2 class="summoner-name" id="summonerNameDisplay"></h2>
+          <div class="summoner-ranks" id="summonerRanks"></div>
+        </div>
+      </div>
+      <div class="live-check">
+        <button class="live-btn" id="liveBtn" onclick="checkLiveGame()">
+          <span class="live-dot"></span>
+          VERIFICAR PARTIDA EN VIVO
+        </button>
+        <p class="live-hint">Asegurate de estar en partida antes de buscar</p>
+      </div>
+    </section>
+
+    <!-- Loading -->
+    <div class="loading-state" id="loadingState" style="display:none">
+      <div class="loader-ring"></div>
+      <p id="loadingMsg">Buscando invocador...</p>
+    </div>
+
+    <!-- Live Game -->
+    <section class="live-game" id="liveGame" style="display:none">
+
+      <!-- Game Info Bar -->
+      <div class="game-info-bar" id="gameInfoBar"></div>
+
+      <!-- Bans -->
+      <div class="bans-section" id="bansSection" style="display:none">
+        <h3 class="section-label">BANS</h3>
+        <div class="bans-grid" id="bansGrid"></div>
+      </div>
+
+      <!-- Teams -->
+      <div class="teams-container">
+        <!-- Team 1 (Azul) -->
+        <div class="team-block team-blue">
+          <div class="team-header">
+            <span class="team-badge blue">EQUIPO AZUL</span>
+          </div>
+          <div class="team-list" id="team1List"></div>
+        </div>
+
+        <!-- VS Divider -->
+        <div class="vs-divider">
+          <div class="vs-line"></div>
+          <span class="vs-text">VS</span>
+          <div class="vs-line"></div>
+        </div>
+
+        <!-- Team 2 (Rojo) -->
+        <div class="team-block team-red">
+          <div class="team-header">
+            <span class="team-badge red">EQUIPO ROJO</span>
+          </div>
+          <div class="team-list" id="team2List"></div>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>LoL Live Tracker no está afiliado con Riot Games · Datos via Riot Games API</p>
+  </footer>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
